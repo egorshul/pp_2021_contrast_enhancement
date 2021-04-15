@@ -3,9 +3,10 @@
 #define CONTRAST_ENHANCEMENT_H_
 
 #include <vector>
-#include <algorithm>
+#include <omp.h>
 #include "opencv2/highgui/highgui.hpp"
 
-void ContrastEnhancement(cv::Mat& matrix);
+cv::Mat ContrastEnhancement(const cv::Mat& matrix);
+cv::Mat ContrastEnhancementOMP(const cv::Mat& matrix);
 
 #endif // CONTRAST_ENHANCEMENT_H_
