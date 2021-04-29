@@ -5,29 +5,21 @@
 
 int main()
 {
-	double startSeq = 0., endSeq = 0., startOmp = 0., endOmp = 0.;
-	cv::Mat pic = cv::imread("omp.jpg", 0);
-	cv::Mat resultSeq, resultOmp;
+	cv::Mat resultSeq, resultOmp, resultTbb;
+	
+	cv::Mat pic = cv::imread("test.jpg", 0);
 	cv::imshow("Исходное", pic);
+	printHistogram(pic);
 
-	startSeq = omp_get_wtime();
 	resultSeq = ContrastEnhancement(pic);
-	endSeq = omp_get_wtime();
 	cv::imshow("Последовательное", resultSeq);
 
-	startOmp = omp_get_wtime();
 	resultOmp = ContrastEnhancementOMP(pic);
-	endOmp = omp_get_wtime();
-	cv::imshow("Параллельное", resultOmp);
+	cv::imshow("OMP", resultOmp);
 
-	double timeSeq = endSeq - startSeq;
-	double timeOmp = endOmp - startOmp;
-	double tick = omp_get_wtick();
-
-	std::cout << "Sequential: " << timeSeq
-			  << " Omp: " << timeOmp
-		      << " Precision: " << tick
-		      << std::endl;
+	resultTbb = ContrastEnhancementTBB(pic);
+	cv::imshow("TBB", resultTbb);
+	printHistogram(resultTbb);
 
 	cv::waitKey(0);
 	return 0;

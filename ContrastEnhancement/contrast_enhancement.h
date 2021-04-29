@@ -6,7 +6,9 @@
 #include <omp.h>
 #include "opencv2/highgui/highgui.hpp"
 
+void printHistogram(const cv::Mat& matrix);
 cv::Mat ContrastEnhancement(const cv::Mat& matrix);
 cv::Mat ContrastEnhancementOMP(const cv::Mat& matrix);
+cv::Mat ContrastEnhancementTBB(const cv::Mat& matrix);
 
 #endif // CONTRAST_ENHANCEMENT_H_
