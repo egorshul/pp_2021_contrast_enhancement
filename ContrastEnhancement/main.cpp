@@ -5,21 +5,27 @@
 
 int main()
 {
-	cv::Mat resultSeq, resultOmp, resultTbb;
+	cv::Mat resultSeq, resultOmp, resultTbb, resultStd;
 	
 	cv::Mat pic = cv::imread("test.jpg", 0);
 	cv::imshow("Исходное", pic);
-	printHistogram(pic);
+	printHistogram(pic, "Histogram");
 
 	resultSeq = ContrastEnhancement(pic);
-	cv::imshow("Последовательное", resultSeq);
+	cv::imshow("SEQ", resultSeq);
+	printHistogram(resultSeq, "HistogramSeq");
 
 	resultOmp = ContrastEnhancementOMP(pic);
 	cv::imshow("OMP", resultOmp);
+	printHistogram(resultOmp, "HistogramOmp");
 
 	resultTbb = ContrastEnhancementTBB(pic);
 	cv::imshow("TBB", resultTbb);
-	printHistogram(resultTbb);
+	printHistogram(resultTbb, "HistogramTbb");
+
+	resultStd = ContrastEnhancementTBB(pic);
+	cv::imshow("STD", resultStd);
+	printHistogram(resultStd, "HistogramStd");
 
 	cv::waitKey(0);
 	return 0;
